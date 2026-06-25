@@ -5,7 +5,6 @@ function DashboardLayout() {
   return (
     <>
       <Sidebar />
-
       <main className="main-content">
         <Outlet />
       </main>

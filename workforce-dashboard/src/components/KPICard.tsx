@@ -1,14 +1,17 @@
-// src/components/KPICard.tsx
+interface Props {
+  title: string;
+  value: string | number;
+}
 
-import MiniChart from "./MiniChart";
-import type { KPI } from "../types/kpi";
-
-const KPICard = ({ title, value, chartType, chartData, color }: KPI) => {
+const KPICard = ({ title, value }: Props) => {
   return (
     <div className="kpi-card">
-      <p>{title}</p>
-      <h2>{value}</h2>
-      <MiniChart type={chartType} data={chartData} color={color} />
+      <div className="kpi-card-label">
+        <h4>{title}</h4>
+      </div>
+      <div className="kpi-card-value">
+        <p>{value}</p>
+      </div>
     </div>
   );
 };
