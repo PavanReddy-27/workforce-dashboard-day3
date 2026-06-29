@@ -9,7 +9,7 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
     <table className="employee-table">
       
       <thead>
-        <tr style={{ background: "#f5f5f5" }}>
+        <tr style={{ background: "#2563eb" }}>
           <th style={styles.th}>ID</th>
           <th style={styles.th}>Name</th>
           <th style={styles.th}>Department</th>
@@ -39,7 +39,7 @@ const EmployeeTable = ({ employees }: EmployeeTableProps) => {
 
 const styles = {
   th: {
-    border: "1px solid #ddd",
+    border: "1px solid #1c1111",
     padding: "10px",
     textAlign: "left" as const,
   },
