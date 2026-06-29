@@ -12,6 +12,7 @@ function Sidebar() {
         <NavLink to="/workforce">Workforce</NavLink>
         <NavLink to="/skills">Skills</NavLink>
         <NavLink to="/reports">Reports</NavLink>
+       
       </nav>
     </header>
   );

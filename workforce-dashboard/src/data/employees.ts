@@ -7,6 +7,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "Frontend Developer",
     experience: 2,
+    location: "Bangalore",
     status: "Active",
   },
   {
@@ -15,6 +16,7 @@ export const employees: Employee[] = [
     department: "QA",
     designation: "QA Engineer",
     experience: 1,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -23,6 +25,7 @@ export const employees: Employee[] = [
     department: "Support",
     designation: "Support Engineer",
     experience: 3,
+    location: "Hyderabad",
     status: "Active",
   },
   {
@@ -31,6 +34,7 @@ export const employees: Employee[] = [
     department: "HR",
     designation: "HR Executive",
     experience: 2,
+    location: "Bangalore",
     status: "Inactive",
   },
   {
@@ -39,6 +43,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "Backend Developer",
     experience: 4,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -47,6 +52,7 @@ export const employees: Employee[] = [
     department: "Finance",
     designation: "Financial Analyst",
     experience: 3,
+    location: "Chennai",
     status: "Active",
   },
   {
@@ -55,6 +61,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "Full Stack Developer",
     experience: 5,
+    location: "Bangalore",
     status: "Active",
   },
   {
@@ -63,6 +70,7 @@ export const employees: Employee[] = [
     department: "QA",
     designation: "Automation Tester",
     experience: 3,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -71,6 +79,7 @@ export const employees: Employee[] = [
     department: "Support",
     designation: "Technical Support Engineer",
     experience: 2,
+    location: "Chennai",
     status: "Inactive",
   },
   {
@@ -79,6 +88,7 @@ export const employees: Employee[] = [
     department: "HR",
     designation: "Recruiter",
     experience: 2,
+    location: "Bangalore",
     status: "Active",
   },
   {
@@ -87,6 +97,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "Software Engineer",
     experience: 4,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -95,6 +106,7 @@ export const employees: Employee[] = [
     department: "Finance",
     designation: "Accountant",
     experience: 2,
+    location: "Chennai",
     status: "Active",
   },
   {
@@ -103,6 +115,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "React Developer",
     experience: 3,
+    location: "Bangalore",  
     status: "Active",
   },
   {
@@ -111,6 +124,7 @@ export const employees: Employee[] = [
     department: "QA",
     designation: "Manual Tester",
     experience: 1,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -119,6 +133,7 @@ export const employees: Employee[] = [
     department: "Support",
     designation: "Support Associate",
     experience: 2,
+    location: "Chennai",
     status: "Active",
   },
   {
@@ -127,6 +142,7 @@ export const employees: Employee[] = [
     department: "Finance",
     designation: "Finance Executive",
     experience: 5,
+    location: "Bangalore",
     status: "Inactive",
   },
   {
@@ -135,6 +151,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "UI Developer",
     experience: 2,
+    location: "Mumbai",
     status: "Active",
   },
   {
@@ -143,6 +160,7 @@ export const employees: Employee[] = [
     department: "HR",
     designation: "HR Manager",
     experience: 6,
+    location: "Pune",
     status: "Active",
   },
   {
@@ -151,6 +169,7 @@ export const employees: Employee[] = [
     department: "Engineering",
     designation: "Software Engineer",
     experience: 3,
+    location:"Pune",
     status: "Active",
   },
   {
@@ -159,6 +178,7 @@ export const employees: Employee[] = [
     department: "Support",
     designation: "Customer Support Engineer",
     experience: 1,
+    location: "Bangalore",
     status: "Active",
   },
 ];

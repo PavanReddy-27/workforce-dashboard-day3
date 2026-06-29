@@ -1,106 +1,128 @@
+import { useCallback } from "react";
+
+import KPICard from "../components/KPICard";
+import SearchBar from "../components/SearchBar";
+import DashboardFilters from "../components/DashboardFilters";
+import EmployeeTable from "../components/EmployeeTable";
+import DepartmentCard from "../components/DepartmentCard";
+
 import { employees } from "../data/employees";
 import { departments } from "../data/departments";
 
-const EmployeeTable = () => {
-  return (
-    <div className="table-container">
-      <h2>Employee Table</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Designation</th>
-            <th>Experience</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.id}>
-              <td>{employee.name}</td>
-              <td>{employee.department}</td>
-              <td>{employee.designation}</td>
-              <td>{employee.experience} Years</td>
-              <td>{employee.status}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
-
-interface DepartmentCardProps {
-  name: string;
-  totalEmployees: number;
-}
-
-const DepartmentCard = ({
-  name,
-  totalEmployees,
-}: DepartmentCardProps) => {
-  return (
-    <div className="department-card">
-      <h3>{name}</h3>
-      <p>{totalEmployees} Employees</p>
-    </div>
-  );
-};
+import useEmployeeSearch from "../hooks/useEmployeeSearch";
+import useDashboardFilters from "../hooks/useDashboardFilters";
+import useKPICalculator from "../hooks/useKPICalculator";
+import usePagination from "../hooks/usePagination";
 
 const Workforce = () => {
-  const activeEmployees = employees.filter(
-    (employee) => employee.status === "Active"
-  ).length;
+  const {
+    search,
+    setSearch,
+    filteredEmployees: searchedEmployees,
+  } = useEmployeeSearch(employees);
 
-  const inactiveEmployees = employees.filter(
-    (employee) => employee.status === "Inactive"
-  ).length;
+  const {
+    department,
+    setDepartment,
+    status,
+    setStatus,
+    location,
+    setLocation,
+    filteredEmployees,
+    resetFilters,
+  } = useDashboardFilters(searchedEmployees);
+
+  const {
+    totalEmployees,
+    activeEmployees,
+    inactiveEmployees,
+  } = useKPICalculator(filteredEmployees);
+
+  const {
+    currentItems,
+    currentPage,
+    totalPages,
+    nextPage,
+    previousPage,
+  } = usePagination(filteredEmployees, 5);
+
+  // const refreshDashboard = useCallback(() => {
+  //   window.location.reload();
+  // }, []);
+
+  const handleSearch = useCallback(
+    (value: string) => {
+      setSearch(value);
+    },
+    [setSearch]
+  );
+
+  const handleReset = useCallback(() => {
+    resetFilters();
+    setSearch("");
+  }, [resetFilters, setSearch]);
 
   return (
-    <div className="dashboard">
-      <h1 className="page-title">
-        Workforce Management
-      </h1>
+    
+    <div className="workforce-page">
+      <h1 className="page-title">Workforce Dashboard</h1>
+
+      <div className="search-filter-bar">
+
+  <SearchBar
+    search={search}
+    setSearch={handleSearch}
+  />
+
+  <DashboardFilters
+    department={department}
+    setDepartment={setDepartment}
+    status={status}
+    setStatus={setStatus}
+    location={location}
+    setLocation={setLocation}
+    resetFilters={handleReset}
+  />
+
+</div>
+{/* 
+      <div className="button-group">
+  <button onClick={refreshDashboard}>Refresh Dashboard</button>
+  <button onClick={handleReset}>Reset Filters</button>
+</div> */}
+
+      <h2 className="section-title">KPIs</h2>
 
       <div className="kpi-grid">
-        <div className="kpi-card">
-          <h4>Total Employees</h4>
-          <h2>{employees.length}</h2>
-        </div>
+  <KPICard title="Total Employees" value={totalEmployees} />
+  <KPICard title="Active Employees" value={activeEmployees} />
+  <KPICard title="Inactive Employees" value={inactiveEmployees} />
+</div>
 
-        <div className="kpi-card">
-          <h4>Active Employees</h4>
-          <h2>{activeEmployees}</h2>
-        </div>
+      <h2>Employees</h2>
 
-        <div className="kpi-card">
-          <h4>Inactive Employees</h4>
-          <h2>{inactiveEmployees}</h2>
-        </div>
+      <EmployeeTable employees={currentItems} />
+
+      <div className="pagination">
+        <button onClick={previousPage}>Previous</button>
+
+        <span>
+          {" "}
+          Page {currentPage} of {totalPages}{" "}
+        </span>
+
+        <button onClick={nextPage}>Next</button>
       </div>
 
-      <EmployeeTable />
-
-      <div>
-        <h2 className="section-title">
-          Department Summary
-        </h2>
-
-        <div className="department-grid">
-          {departments.map((department) => (
-            <DepartmentCard
-              key={department.id}
-              name={department.name}
-              totalEmployees={
-                department.totalEmployees
-              }
-            />
-          ))}
-        </div>
-      </div>
+      <h2 className="section-title">Department Summary</h2>
+<div className="department-grid">
+  {departments.map((department) => (
+    <DepartmentCard
+      key={department.id}
+      department={department}
+    />
+  ))}
+</div>
     </div>
   );
 };
