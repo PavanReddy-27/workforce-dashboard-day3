@@ -6,8 +6,8 @@ import DashboardFilters from "../components/DashboardFilters";
 import EmployeeTable from "../components/EmployeeTable";
 import DepartmentCard from "../components/DepartmentCard";
 
-import { employees } from "../data/employees";
-import { departments } from "../data/departments";
+import { useEmployees } from "../hooks/useEmployees";
+import { useDepartments } from "../hooks/useDepartments";
 
 import useEmployeeSearch from "../hooks/useEmployeeSearch";
 import useDashboardFilters from "../hooks/useDashboardFilters";
@@ -15,6 +15,10 @@ import useKPICalculator from "../hooks/useKPICalculator";
 import usePagination from "../hooks/usePagination";
 
 const Workforce = () => {
+  const { data: employees = [], isLoading, isError } = useEmployees();
+
+const { data: departments = [] } = useDepartments();
+
   const {
     search,
     setSearch,
@@ -62,6 +66,10 @@ const Workforce = () => {
     setSearch("");
   }, [resetFilters, setSearch]);
 
+    if (isLoading) return <h2>Loading...</h2>;
+
+if (isError) return <h2>Error loading employees.</h2>;
+
   return (
     
     <div className="workforce-page">
@@ -75,6 +83,7 @@ const Workforce = () => {
   />
 
   <DashboardFilters
+     departments={departments.map((d) => d.name)}
     department={department}
     setDepartment={setDepartment}
     status={status}
@@ -125,6 +134,7 @@ const Workforce = () => {
 </div>
     </div>
   );
+
 };
 
 export default Workforce;

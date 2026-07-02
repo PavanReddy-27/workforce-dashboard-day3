@@ -4,22 +4,21 @@ import HiringAreaChart from "../components/charts/HiringAreaChart";
 import DepartmentPieChart from "../components/charts/DepartmentPieChart";
 import SkillDonutChart from "../components/charts/SkillDonutChart";
 
-import { employees } from "../data/employees";
-import useKPICalculator from "../hooks/useKPICalculator";
+import { useEmployees } from "../hooks/useEmployees";
+import { useKPIs } from "../hooks/useKPIs";
 
 const Dashboard = () => {
-  const {
-    totalEmployees,
-    attritionRate,
-    hiringRate,
-    skillCoverage,
-  } = useKPICalculator(employees);
+  const { data: employees = [], isLoading: employeesLoading, isError: employeesError } = useEmployees();
+  const { data: kpis = [], isLoading: kpisLoading, isError: kpisError } = useKPIs();
+
+  if (employeesLoading || kpisLoading) return <h2>Loading...</h2>;
+  if (employeesError || kpisError) return <h2>Error loading dashboard data.</h2>;
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Workforce Analytics Dashboard</h1>
 
-      {/* KPI Cards */}
+      {/* KPI Cards - now driven by useKPIs() */}
       <div
         style={{
           display: "grid",
@@ -28,25 +27,9 @@ const Dashboard = () => {
           margin: "20px 0",
         }}
       >
-        <KPICard
-          title="Total Employees"
-          value={totalEmployees}
-        />
-
-        <KPICard
-          title="Attrition Rate"
-          value={attritionRate}
-        />
-
-        <KPICard
-          title="Hiring Rate"
-          value={hiringRate}
-        />
-
-        <KPICard
-          title="Skill Coverage"
-          value={skillCoverage}
-        />
+        {kpis.map((kpi) => (
+          <KPICard key={kpi.title} title={kpi.title} value={kpi.value} />
+        ))}
       </div>
 
       {/* Charts */}
@@ -58,11 +41,8 @@ const Dashboard = () => {
         }}
       >
         <EmployeeLineChart />
-
         <HiringAreaChart />
-
         <DepartmentPieChart />
-
         <SkillDonutChart />
       </div>
     </div>

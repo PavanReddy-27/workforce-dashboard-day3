@@ -14,7 +14,7 @@ const useDashboardFilters = (employees: Employee[]) => {
       const statusMatch =
         status === "All" || employee.status === status;
 
-      // Works even if location doesn't exist yet
+      
       const locationMatch =
         location === "All" || employee.location === location;
 

@@ -9,9 +9,12 @@ interface DashboardFiltersProps {
   setLocation: (value: string) => void;
 
   resetFilters: () => void;
+  
+  departments: string[];
 }
 
 const DashboardFilters = ({
+  departments,
   department,
   setDepartment,
   status,
@@ -28,11 +31,14 @@ const DashboardFilters = ({
         onChange={(e) => setDepartment(e.target.value)}
       >
         <option value="All">All Departments</option>
-        <option value="Engineering">Engineering</option>
-        <option value="QA">QA</option>
-        <option value="HR">HR</option>
-        <option value="Finance">Finance</option>
-        <option value="Support">Support</option>
+        {departments.map((dept) => (
+  <option
+    key={dept}
+    value={dept}
+  >
+    {dept}
+  </option>
+))}
       </select>
 
       <select
